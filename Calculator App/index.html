@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Calculator App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="../css/keyboard.css" rel="stylesheet">
+  <script src="../js/jquery.keyboard.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script>
+
+  // Get the modal
+var modal = document.getElementById('calc_modal');
+
+// Get the button that opens the modal
+var btn = document.getElementById("calc_btn");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+    <script>
+    function addChar(input, character) {
+    	if(input.value == null || input.value == "0")
+    		input.value = character
+    	else
+    		input.value += character
+    }
+     
+    function cos(form) {
+    	form.display.value = Math.cos(form.display.value);
+    }
+     
+    function sin(form) {
+    	form.display.value = Math.sin(form.display.value);
+    }
+     
+    function tan(form) {
+    	form.display.value = Math.tan(form.display.value);
+    }
+     
+    function sqrt(form) {
+    	form.display.value = Math.sqrt(form.display.value);
+    }
+     
+    function ln(form) {
+    	form.display.value = Math.log(form.display.value);
+    }
+     
+    function exp(form) {
+    	form.display.value = Math.exp(form.display.value);
+    }
+     
+    function deleteChar(input) {
+    	input.value = input.value.substring(0, input.value.length - 1)
+    }
+     
+    function changeSign(input) {
+    	if(input.value.substring(0, 1) == "-")
+    		input.value = input.value.substring(1, input.value.length)
+    	else
+    		input.value = "-" + input.value
+    }
+     
+    function compute(form) {
+    	form.display.value = eval(form.display.value)
+    }
+     
+    function square(form) {
+    	form.display.value = eval(form.display.value) * eval(form.display.value)
+    }
+     
+    function checkNum(str) {
+    	for (var i = 0; i < str.length; i++) {
+    		var ch = str.substring(i, i+1)
+    		if (ch < "0" || ch > "9") {
+    			if (ch != "/" && ch != "*" && ch != "+" && ch != "-" && ch != "."
+    				&& ch != "(" && ch!= ")") {
+    				alert("invalid entry!")
+    				return false
+    				}
+    			}
+    		}
+    		return true
+    }
+</script>
+
+  </head>
+
+  <body>
+      
+        
+          <div class="container">
+            <img src="image/canya.png" class="center">
+            <p class="lead text-muted"><center><h3>CanCalculator is an aplication that is dedicated the freelancers for to offer them an everyday utility.<center><h3></p>
+            <div class="btn_group">
+            <button type="button" class="btn " data-toggle="modal" data-target="#calcModal"><h3>Scientific Calculator</h3></button>
+           
+            <button type="button"  class="btn " data-toggle="modal" data-target="#convModal"><h3>Converter</h3></button>
+            </div>
+<!-- The Modal -->
+<div class="modal fade" id="calcModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title"></h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            
+            <!-- Modal body -->
+            <div class="modal-body">
+            <div class="calc-row controls display transparent-blur">
+                    <div id="control-bar" class="calc-top">
+                      <ul>
+                        <li class="control-button calc-quit"></li>
+                        <li class="control-button calc-min"></li>
+                        <li class="control-button calc-max"></li>
+                      </ul>
+                    </div>
+                    <div id="display" class="calc-top">
+                    <span id="display-window">0</span>
+                    </div>
+                  </div>
+                  <!-- PREPARING TO BUILD SCIENTIFIC CALC HTML-->
+                  <div class="calc-row buttons">
+                    <div id="lft-paren" class="calc-button scientific bg-gray">&lpar;</div> <!-- left parentheses -->
+                    <div id="rht-paren" class="calc-button scientific bg-gray">&rpar;</div>  <!-- right parentheses -->
+                    <div id="mem-clear" class="calc-button scientific bg-gray">mc</div>  <!-- clear memVal -->
+                    <div id="mem-add" class="calc-button scientific bg-gray">m&plus;</div>  <!-- add dispVal to memVal -->
+                    <div id="mem-subtract" class="calc-button scientific bg-gray">m&minus;</div> <!-- subtract dispVal to memVal -->
+                    <div id="mem-recall" class="calc-button scientific bg-gray">mr</div>  <!-- recall memVal to display -->
+                    <div id="calc-clear" class="calc-button-perm bg-gray">AC</div><!-- clear values -->
+                    <div id="plus-minus" class="calc-button-perm bg-gray">&plusmn;</div><!-- +/- toggle ( dispVal * -1 ) -->
+                    <div id="percent" class="calc-button-perm bg-gray">&percnt;</div><!-- percent (dispVal / 100 ) -->
+                    <div id="divide" class="calc-button-perm bg-orange">&divide;</div><!-- divide -->
+                  </div>
+                  <div class="calc-row buttons">
+                    <div id="second-func" class="calc-button scientific bg-gray">2<sup>nd</sup></div><!-- toggle to 2nd function on some buttons -->
+                    <div id="calc-squared" class="calc-button scientific bg-gray">x&sup2;</div><!-- squared value -->
+                    <div id="calc-cubed" class="calc-button scientific bg-gray">x&sup3;</div><!-- cube value -->
+                    <div id="calc-xtoy" class="calc-button scientific bg-gray">x<sup>y</sup></div><!-- x to the y power -->
+                    <div id="calc-etox" class="calc-button scientific first-function bg-gray">e<sup>x</sup></div><!-- e to the x power -->
+                    <div id="calc-ytox" class="calc-button scientific second-function bg-gray">y<sup>x</sup></div><!-- y to the x power -->
+                    <div id="calc-tentox" class="calc-button scientific first-function bg-gray">10<sup>x</sup></div><!-- 10 to the x power -->
+                    <div id="calc-twotox" class="calc-button scientific second-function bg-gray">2<sup>x</sup></div><!-- 2 to the x power -->
+                    <div class="calc-button-perm bg-gray calc-num">7</div>
+                    <div class="calc-button-perm bg-gray calc-num">8</div>
+                    <div class="calc-button-perm bg-gray calc-num">9</div>
+                    <div id="multiply" class="calc-button-perm bg-orange">&times;</div><!-- multiply -->
+                  </div>
+                  <div class="calc-row buttons">
+                    <div id="calc-inverse" class="calc-button scientific bg-gray">1/x</div><!-- inverse -->
+                    <div id="calc-sqrt" class="calc-button scientific bg-gray">&radic;</div><!-- square root-->
+                    <div id="calc-cube-root" class="calc-button scientific bg-gray">&#8731;</div><!-- cube root -->
+                    <div id="calc-xroot" class="calc-button scientific bg-gray">y&radic;x</div><!-- x root -->
+                    <div id="calc-ln" class="calc-button scientific first-function bg-gray">ln</div><!-- natural log -->
+                    <div id="calc-logy" class="calc-button scientific second-function bg-gray">log<sub>y</sub></div><!-- log base y-->
+                    <div id="calc-logten" class="calc-button scientific first-function bg-gray">log<sub>10</sub></div><!-- log base 10-->
+                    <div id="calc-logtwo" class="calc-button scientific second-function bg-gray">log<sub>2</sub></div><!-- log base 2-->
+                    <div class="calc-button-perm bg-gray calc-num">4</div>
+                    <div class="calc-button-perm bg-gray calc-num">5</div>
+                    <div class="calc-button-perm bg-gray calc-num">6</div>
+                    <div id="subtract" class="calc-button-perm bg-orange">&minus;</div><!-- subtract -->
+                  </div>
+                  <div class="calc-row buttons">
+                    <div id="calc-factorial" class="calc-button scientific bg-gray">x!</div><!-- x factorial -->
+                    <div id="calc-sin" class="calc-button scientific first-function bg-gray">sin</div><!-- sine -->
+                    <div id="calc-arcsin" class="calc-button scientific second-function bg-gray">sin<sup>-1</sup></div><!-- arcsine -->
+                    <div id="calc-cos" class="calc-button scientific first-function bg-gray">cos</div><!-- cosine -->
+                    <div id="calc-arccos" class="calc-button scientific second-function bg-gray">cos<sup>-1</sup></div><!-- arc cosine -->
+                    <div id="calc-tan" class="calc-button scientific first-function bg-gray">tan</div><!-- tangent -->
+                    <div id="calc-arctan" class="calc-button scientific second-function bg-gray">tan<sup>-1</sup></div><!-- arctan -->
+                    <div id="const-e" class="calc-button scientific bg-gray">e</div> <!-- e (constant) -->
+                    <div id="calc-enter-exponent" class="calc-button scientific bg-gray">EE</div> <!-- scientific notation -->
+                    <div class="calc-button-perm bg-gray calc-num">1</div>
+                    <div class="calc-button-perm bg-gray calc-num">2</div>
+                    <div class="calc-button-perm bg-gray calc-num">3</div>
+                    <div id="add" class="calc-button-perm bg-orange">&plus;</div>
+                  </div>
+                  <div class="calc-row buttons">
+                    <div id="calc-radian" class="calc-button scientific bg-gray">Rad</div> <!-- calculate in radians -->
+                    <div id="calc-degrees" class="calc-button scientific bg-gray">Deg</div> <!-- calculate in degrees -->
+                    <div id="calc-sinh" class="calc-button scientific first-function bg-gray">sinh</div> <!-- hyperbolic sine -->
+                    <div id="calc-arcsinh" class="calc-button scientific second-function bg-gray">sinh<sup>-1</sup></div> <!-- inverse hyperb. sine -->
+                    <div id="calc-cosh" class="calc-button scientific first-function bg-gray">cosh</div> <!-- hyperbolic cosine -->
+                    <div id="calc-arccosh" class="calc-button scientific second-function bg-gray">cosh<sup>-1</sup></div> <!--  hyperbolic cosine -->
+                    <div id="calc-tanh" class="calc-button scientific first-function bg-gray">tanh</div> <!-- hyperbolic tangent -->
+                    <div id="calc-arctanh" class="calc-button scientific second-function bg-gray">tanh<sup>-1</sup></div> <!-- hyperbolic tangent -->
+                    <div id="const-pi" class="calc-button scientific bg-gray">&pi;</div> <!-- pi (constant) -->
+                    <div id="calc-random" class="calc-button scientific bg-gray">Rand</div><!-- random number between 0 and 1 -->
+                    <div class="calc-button-perm-wide bg-gray btn-zero calc-num">0</div>
+                    <div id="calc-decimal" class="calc-button-perm bg-gray">&period;</div>
+                    <div id="evaluate" class="calc-button-perm bg-orange btn-equal" >&equals;</div>
+                  </div>
+                 
+                  
+                </div>  
+          </div>
+        </div>
+    </div>
+      <!-- The Modal -->
+<div class="modal fade" id="convModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          
+            <!-- Modal Header -->
+            <div class="modal-header">
+              
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                    <h4><strong>Length Converter</strong></h4>
+                    <h4>Type a value in the Feet field to convert the value to Meters:</h4>
+                    <p>
+                      <input id="inputFeet" type="number" placeholder="Feet" oninput="LengthConverter(this.value)" onchange="LengthConverter(this.value)">
+                    </p>
+                    
+                    <p>Meters: <span id="outputMeters"></span></p>
+                    
+                    <div class="margin">
+                    <h4><strong>Weight Converter</strong></h4>
+   <h4>Type a value in the Pounds field to convert the value to Kilograms:</h4>
+   </div>
+   
+
+<div class="top"></div>
+  <input id="inputPounds" type="number" placeholder="Pounds" oninput="weightConverter(this.value)" onchange="weightConverter(this.value)">
+</p>
+<p>Kilograms: <span id="outputKilograms"></span></p>
+            </div>
+            
+            <h4><strong>Temperature Converter</strong></h4>
+            <h4>Type a value in the Fahrenheit field to convert the value to Celsius:</h4>
+            
+            <p>
+              
+              <input id="inputFahrenheit" type="number" placeholder="Fahrenheit" oninput="temperatureConverter(this.value)" onchange="temperatureConverter(this.value)">
+            </p>
+            <p>Celcius: <span id="outputCelcius"></span></p>
+            
+            
+            
+          </div>
+        </div>
+    </div>
+                     
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <footer class="text-muted">
+            <div class="container">
+              <p class="float-right">
+              </p>
+              <h5>The benefits are that the CanYa Ecosystem to keep 
+               freelancers on the platform for longer by offering an everyday utility</h5>
+               <h5><center> &copy; Copyright 2018</center></h5>
+              
+            </div>
+          </footer>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+      <script src="../../assets/js/vendor/popper.min.js"></script>
+      <script src="../../dist/js/bootstrap.min.js"></script>
+      <script src="../../assets/js/vendor/holder.min.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+
+          <script>
+                function LengthConverter(valNum) {
+                  document.getElementById("outputMeters").innerHTML=valNum/3.2808;
+                }
+              
+                        function weightConverter(valNum) {
+                          document.getElementById("outputKilograms").innerHTML=valNum/2.2046;
+                        }
+                     
+              
+                    
+                            function temperatureConverter(valNum) {
+                              valNum = parseFloat(valNum);
+                              document.getElementById("outputCelcius").innerHTML=(valNum-32)/1.8;
+                            }
+                            </script>
+                   </script>
+                   <script>
+                           $(".btn-group > .btn").click(function(){
+    $(".btn-group > .btn").removeClass("active");
+    $(this).addClass("active");
+});
+</script>
+
+    </body>
+  </html>
+  
